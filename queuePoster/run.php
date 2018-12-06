@@ -20,7 +20,7 @@
 		public function AddMedia($file,$focus="0,0")
 		{
 			// Only 4 Media
-			if (count($this->mediaIDs>=4)
+			if (count($this->mediaIDs>=4))
 			{
 				echo "ERROR: You can add a maximum of 4 media elements only!"."\n";
 			}
@@ -51,7 +51,7 @@
 		private $status=null;
 		public function SetStatus($text)
 		{
-			$this-status=$text;
+			$this->status=$text;
 		}
 		
 		private $spoiler=null;
