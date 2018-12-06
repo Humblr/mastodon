@@ -24,44 +24,44 @@ $api->Publish();
 
 ## Full Example for a simple Image Queue
 ```php
-  ...
+...
 
-	// The Path to your Queue folder containing the Images
-	define("PATH","./queue");
-	
-	// The minimum Time between two Posts [WARNING: The Minimum time has to be 60, otherwise the API will block you!]
-	define("MIN_SLEEP",60);
-	
-	// The maximum Time between two Posts
-	define("MAX_SLEEP",120);
-	
-		
-	while (true)
-	{
-		// Get all Images in Path
-		$files=glob(PATH."/*.jpg");
-		echo "\n\nQueue has ".count($files)." images left...\n";
-		
-		// Select one at random
-		$currentImage=$files[array_rand($files)];
-		
-		// Post the Image to the API
-		$api=new HumblrAPI("YOUR_TOKEN");
-		$api->AddMedia($currentImage);
-		$api->SetStatus("Your Status Text");
-		$api->Publish();
-		
-		// Remove the Image from the Queue
-		unlink($currentImage);
-	
-		// Wait for the defined amount of time to post the next image
-		// Also Display the remaining time
-		for ($i=rand(MIN_SLEEP,MAX_SLEEP);$i>=0;$i--)
-		{
-			echo "\rNext Post in ".$i."s...";
-			sleep(1);
-		}
-	}
+// The Path to your Queue folder containing the Images
+define("PATH","./queue");
+
+// The minimum Time between two Posts [WARNING: The Minimum time has to be 60, otherwise the API will block you!]
+define("MIN_SLEEP",60);
+
+// The maximum Time between two Posts
+define("MAX_SLEEP",120);
+
+
+while (true)
+{
+  // Get all Images in Path
+  $files=glob(PATH."/*.jpg");
+  echo "\n\nQueue has ".count($files)." images left...\n";
+
+  // Select one at random
+  $currentImage=$files[array_rand($files)];
+
+  // Post the Image to the API
+  $api=new HumblrAPI("YOUR_TOKEN");
+  $api->AddMedia($currentImage);
+  $api->SetStatus("Your Status Text");
+  $api->Publish();
+
+  // Remove the Image from the Queue
+  unlink($currentImage);
+
+  // Wait for the defined amount of time to post the next image
+  // Also Display the remaining time
+  for ($i=rand(MIN_SLEEP,MAX_SLEEP);$i>=0;$i--)
+  {
+    echo "\rNext Post in ".$i."s...";
+    sleep(1);
+  }
+}
 ```
 
 ## Methods
