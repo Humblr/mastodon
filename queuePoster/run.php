@@ -66,7 +66,7 @@
 			for ($i=0;$i<$this->timeout;$i++)
 			{
 				// Post Media to the API
-				$status=json_decode(shell_exec('curl --silent -X POST "'.$this->endpoint.'/statuses" -H "Authorization: Bearer '.$this->token.'" -H "Content-Type: multipart/form-data;" '.implode(" ",array_map(function($v){ return '-F "media_ids[]='.urlencode($v).'"'; },$this->mediaIDs)).' '.($this->status!==null?' -F "status='.urlencode($this->status).'" ':'').' '.($this->spoiler!==null?' -F "spoiler_text='.urlencode($this->spoiler).'" ':'').''));
+				$status=json_decode(shell_exec('curl --silent -X POST "'.$this->endpoint.'/statuses" -H "Authorization: Bearer '.$this->token.'" -H "Content-Type: multipart/form-data;" '.implode(" ",array_map(function($v){ return '-F "media_ids[]='.$v.'"'; },$this->mediaIDs)).' '.($this->status!==null?' -F "status='.$this->status.'" ':'').' '.($this->spoiler!==null?' -F "spoiler_text='.$this->spoiler.'" ':'').''));
 				if (isset($status->id))
 				{
 					// Status upload success
